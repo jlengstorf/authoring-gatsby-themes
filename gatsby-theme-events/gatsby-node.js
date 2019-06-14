@@ -8,3 +8,10 @@ exports.onPreBootstrap = ({ reporter }) => {
     fs.mkdirSync(dataDir);
   }
 };
+
+exports.createPages = async ({ actions, graphql, reporter }) => {
+  actions.createPage({
+    path: '/',
+    component: require.resolve('./src/templates/events.js')
+  });
+};
