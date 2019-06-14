@@ -8,12 +8,10 @@ export const query = graphql`
     event(id: { eq: $eventID }) {
       name
       url
-      start_date(formatString: "MMMM D, YYYY")
-      end_date(formatString: "MMMM D, YYYY")
+      startDate(formatString: "MMMM D, YYYY")
+      endDate(formatString: "MMMM D, YYYY")
       location
-      fields {
-        slug
-      }
+      slug
     }
   }
 `;
@@ -23,10 +21,10 @@ const EventTemplate = ({ data: { event } }) => (
     <Event
       name={event.name}
       url={event.url}
-      startDate={event.start_date}
-      endDate={event.end_date}
+      startDate={event.startDate}
+      endDate={event.endDate}
       location={event.location}
-      slug={event.fields.slug}
+      slug={event.slug}
     />
   </Layout>
 );

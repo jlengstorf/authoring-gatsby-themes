@@ -4,16 +4,26 @@ exports.onPreBootstrap = ({ reporter }) => {
   const dataDir = 'data';
 
   if (!fs.existsSync(dataDir)) {
-    reporter.log(`creating the ${dataDir} directory`);
+    reporter.info(`creating the ${dataDir} directory`);
     fs.mkdirSync(dataDir);
   }
 };
 
-exports.onCreateNode = ({ node, actions }) => {
-  if (node.internal.type !== 'Event') {
-    return;
-  }
+exports.sourceNodes = ({ actions }) => {
+  actions.createTypes(`
+    type Event implements Node @dontInfer {
+      id: ID!
+      name: String!
+      location: String!
+      startDate: Date! @dateformat @proxy(from: "start_date")
+      endDate: Date! @dateformat @proxy(from: "end_date")
+      url: String!
+      slug: String!
+    }
+  `);
+};
 
+exports.createResolvers = ({ createResolvers }) => {
   // Quick-and-dirty helper to convert strings into URL-friendly slugs.
   const slugify = str =>
     str
@@ -21,12 +31,12 @@ exports.onCreateNode = ({ node, actions }) => {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)+/g, '');
 
-  const slug = slugify(node.name);
-
-  actions.createNodeField({
-    node,
-    name: 'slug',
-    value: slug
+  createResolvers({
+    Event: {
+      slug: {
+        resolve: source => slugify(source.name)
+      }
+    }
   });
 };
 
@@ -38,12 +48,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     query {
-      allEvent(sort: { fields: start_date, order: ASC }) {
+      allEvent(sort: { fields: startDate, order: ASC }) {
         nodes {
           id
-          fields {
-            slug
-          }
+          slug
         }
       }
     }
@@ -57,7 +65,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const events = result.data.allEvent.nodes;
 
   events.forEach(event => {
-    const slug = event.fields.slug;
+    const slug = event.slug;
 
     actions.createPage({
       path: slug,

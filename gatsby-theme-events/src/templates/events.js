@@ -6,31 +6,21 @@ import EventList from '../components/event-list';
 const EventsTemplate = () => {
   const data = useStaticQuery(graphql`
     query {
-      allEvent(sort: { fields: start_date, order: ASC }) {
+      allEvent(sort: { fields: startDate, order: ASC }) {
         nodes {
           id
           name
-          start_date
-          end_date
+          startDate
+          endDate
           location
           url
-          fields {
-            slug
-          }
+          slug
         }
       }
     }
   `);
 
-  const events = data.allEvent.nodes.map(event => ({
-    id: event.id,
-    name: event.name,
-    startDate: event.start_date,
-    endDate: event.end_date,
-    location: event.location,
-    url: event.url,
-    slug: event.fields.slug
-  }));
+  const events = data.allEvent.nodes;
 
   return (
     <Layout>
