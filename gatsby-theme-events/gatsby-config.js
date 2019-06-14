@@ -1,9 +1,9 @@
-module.exports = {
+module.exports = ({ dataDir = 'data' }) => ({
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: 'data'
+        path: dataDir
       }
     },
     {
@@ -13,4 +13,4 @@ module.exports = {
       }
     }
   ]
-};
+});
