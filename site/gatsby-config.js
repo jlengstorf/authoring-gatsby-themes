@@ -3,8 +3,8 @@ module.exports = {
     {
       resolve: 'gatsby-theme-events',
       options: {
-        dataDir: 'data',
-        pathRoot: '/events'
+        contentPath: 'data',
+        basePath: '/events'
       }
     }
   ]

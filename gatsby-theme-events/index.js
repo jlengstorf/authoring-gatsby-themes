@@ -1,1 +1,1 @@
-// boop
+export { theme } from './src/theme';

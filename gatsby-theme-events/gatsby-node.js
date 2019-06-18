@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 exports.onPreBootstrap = ({ reporter }, options) => {
-  const dataDir = options.dataDir || 'data';
+  const contentPath = options.contentPath || 'data';
 
-  if (!fs.existsSync(dataDir)) {
-    reporter.info(`creating the ${dataDir} directory`);
-    fs.mkdirSync(dataDir);
+  if (!fs.existsSync(contentPath)) {
+    reporter.info(`creating the ${contentPath} directory`);
+    fs.mkdirSync(contentPath);
   }
 };
 
@@ -25,7 +25,7 @@ exports.sourceNodes = ({ actions }) => {
 };
 
 exports.createResolvers = ({ createResolvers }, options) => {
-  const pathRoot = options.pathRoot || '/';
+  const basePath = options.basePath || '/';
 
   // Quick-and-dirty helper to convert strings into URL-friendly slugs.
   const slugify = str =>
@@ -37,16 +37,16 @@ exports.createResolvers = ({ createResolvers }, options) => {
   createResolvers({
     Event: {
       slug: {
-        resolve: source => path.join(pathRoot, slugify(source.name))
+        resolve: source => path.join(basePath, slugify(source.name))
       }
     }
   });
 };
 
 exports.createPages = async ({ actions, graphql, reporter }, options) => {
-  const pathRoot = options.pathRoot || '/';
+  const basePath = options.basePath || '/';
   actions.createPage({
-    path: pathRoot,
+    path: basePath,
     component: require.resolve('./src/templates/events.js')
   });
 

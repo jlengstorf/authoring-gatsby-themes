@@ -1,31 +1,40 @@
 import React from 'react';
+import { Styled } from 'theme-ui';
+
+const getDate = (date, { day = true, month = true, year = true } = {}) =>
+  date.toLocaleDateString('en-US', {
+    day: day ? 'numeric' : undefined,
+    month: month ? 'long' : undefined,
+    year: year ? 'numeric' : undefined
+  });
 
 const EventDate = ({ startDate, endDate }) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
+  const isOneDay = start.toDateString() === end.toDateString();
 
   return (
     <>
       <time dateTime={start.toISOString()}>
-        {start.toLocaleDateString('en-US', { day: 'numeric', month: 'long' })}
+        {getDate(start, { year: isOneDay })}
       </time>
-      –
-      <time datetime={end.toISOString()}>
-        {end.toLocaleDateString('en-US', {
-          day: 'numeric',
-          month: start.getMonth() !== end.getMonth() ? 'long' : undefined,
-          year: 'numeric'
-        })}
-      </time>
+      {!isOneDay && (
+        <>
+          –
+          <time dateTime={end.toISOString()}>
+            {getDate(end, { month: start.getMonth() !== end.getMonth() })}
+          </time>
+        </>
+      )}
     </>
   );
 };
 
 const Event = ({ name, location, url, startDate, endDate }) => (
   <div>
-    <h1>
+    <Styled.h1>
       {name} ({location})
-    </h1>
+    </Styled.h1>
     <p>
       <EventDate startDate={startDate} endDate={endDate} />
     </p>
