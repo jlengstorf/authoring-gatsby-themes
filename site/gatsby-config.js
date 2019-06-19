@@ -1,7 +1,7 @@
 module.exports = {
   __experimentalThemes: [
     {
-      resolve: 'gatsby-theme-events',
+      resolve: '@jlengstorf/gatsby-theme-events',
       options: {
         contentPath: 'data',
         basePath: '/events'
