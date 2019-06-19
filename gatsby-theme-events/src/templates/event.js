@@ -18,14 +18,7 @@ export const query = graphql`
 
 const EventTemplate = ({ data: { event } }) => (
   <Layout>
-    <Event
-      name={event.name}
-      url={event.url}
-      startDate={event.startDate}
-      endDate={event.endDate}
-      location={event.location}
-      slug={event.slug}
-    />
+    <Event {...event} />
   </Layout>
 );
 
