@@ -1,43 +1,17 @@
-const fontSizeBase = 18;
-const fontSizes = [0.875, 1, 1.125, 1.25, 1.5, 2].map(
-  scale => fontSizeBase * scale
-);
-
-fontSizes.body = fontSizes[1];
-fontSizes.heading = fontSizes[5];
-fontSizes.subheading = fontSizes[4];
-
-const headingDefaults = {
-  color: 'heading',
-  fontWeight: 'heading',
-  lineHeight: 'heading',
-  margin: '1rem 0 0'
-};
-
 export const theme = {
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  space: [0, 4, 8, 16, 32],
   fonts: {
-    body:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    heading: 'inherit',
-    monospace: 'Menlo, monospace'
+    body: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
   },
-  fontSizes,
-  fontWeights: {
-    body: 'normal',
-    heading: 'bold',
-    bold: 'bold'
-  },
+  fontSizes: [16, 18, 20, 22, 27, 36],
   lineHeights: {
     body: 1.45,
     heading: 1.1
   },
   colors: {
-    gray: ['#efefef', '#ddd', '#777', '#333', '#111'],
-    text: '#333',
-    heading: '#111',
+    gray: ['#efefef', '#ddd', '#333', '#111'],
     background: '#fff',
-    primary: '#ff0'
+    primary: 'rebeccapurple'
   },
   sizes: {
     default: '90vw',
@@ -45,34 +19,37 @@ export const theme = {
   },
   styles: {
     Layout: {
-      color: 'text',
+      color: 'gray.2',
       fontFamily: 'body',
-      fontSize: 'body',
-      lineHeight: 'body',
-      fontWeight: 'body'
+      fontSize: 1,
+      lineHeight: 'body'
     },
     Header: {
+      backgroundColor: 'primary',
+      color: 'background',
+      fontWeight: 'bold',
       margin: '0 auto',
       maxWidth: 'max',
-      width: 'default'
+      padding: 3,
+      width: 'default',
+      a: {
+        color: 'inherit'
+      }
     },
     Main: {
       margin: '0 auto',
-      marginBottom: 4,
-      marginTop: 4,
       maxWidth: 'max',
       width: 'default'
     },
     Container: {
-      padding: 0
+      padding: 3
     },
     h1: {
-      ...headingDefaults,
-      fontSize: 'heading'
-    },
-    h2: {
-      ...headingDefaults,
-      fontSize: 'subheading'
+      color: 'gray.3',
+      fontSize: 5,
+      fontWeight: 'bold',
+      lineHeight: 'heading',
+      margin: '1rem 0 0'
     },
     ul: {
       borderTop: '1px solid',

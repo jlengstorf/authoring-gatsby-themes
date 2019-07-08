@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 
 exports.onPreBootstrap = ({ reporter }, options) => {
   const contentPath = options.contentPath || 'data';
@@ -28,16 +27,19 @@ exports.createResolvers = ({ createResolvers }, options) => {
   const basePath = options.basePath || '/';
 
   // Quick-and-dirty helper to convert strings into URL-friendly slugs.
-  const slugify = str =>
-    str
+  const slugify = str => {
+    const slug = str
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)+/g, '');
 
+    return `/${basePath}/${slug}`.replace(/\/\/+/g, '/');
+  };
+
   createResolvers({
     Event: {
       slug: {
-        resolve: source => path.join(basePath, slugify(source.name))
+        resolve: source => slugify(source.name)
       }
     }
   });

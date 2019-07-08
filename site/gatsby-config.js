@@ -1,5 +1,5 @@
 module.exports = {
-  __experimentalThemes: [
+  plugins: [
     {
       resolve: '@jlengstorf/gatsby-theme-events',
       options: {
