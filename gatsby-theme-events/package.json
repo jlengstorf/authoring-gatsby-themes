@@ -9,12 +9,12 @@
     "develop": "gatsby develop"
   },
   "peerDependencies": {
-    "gatsby": "^2.9.2",
+    "gatsby": "^2.9.12-themes-plugins.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "gatsby": "^2.9.2",
+    "gatsby": "^2.9.12-themes-plugins.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },

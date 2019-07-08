@@ -4,8 +4,8 @@ module.exports = ({ contentPath = 'data', basePath = '/' }) => ({
     headline: 'Upcoming Events',
     basePath
   },
+  __experimentalThemes: ['gatsby-theme-ui'],
   plugins: [
-    'gatsby-theme-ui',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
