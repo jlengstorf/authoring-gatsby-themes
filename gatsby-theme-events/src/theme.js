@@ -31,7 +31,10 @@ export const theme = {
       margin: '0 auto',
       maxWidth: 'max',
       padding: 3,
-      width: 'default'
+      width: 'default',
+      a: {
+        color: 'inherit'
+      }
     },
     Main: {
       margin: '0 auto',
