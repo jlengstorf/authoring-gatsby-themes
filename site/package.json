@@ -11,7 +11,7 @@
   "dependencies": {
     "@jlengstorf/gatsby-theme-events": "^1.0.0",
     "gatsby": "^2.13.9",
-    "lodash.merge": "^4.6.1",
+    "lodash.merge": "^4.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
